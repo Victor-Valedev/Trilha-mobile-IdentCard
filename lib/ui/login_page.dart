@@ -64,7 +64,15 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context, 
+                    builder: (_) => AlertDialog(
+                      title: Text('Login de Teste'),
+                      content: Text('Username: emylys \nPassword: emylyspass'),
+                    ),
+                  );
+                },
                 style: TextButton.styleFrom(
                   textStyle: TextStyle(decoration: TextDecoration.underline),
                 ),
