@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:trilhamobileatvd/model/dto/user_request_dto.dart';
 import 'package:trilhamobileatvd/service/client_http.dart';
-
+import 'package:trilhamobileatvd/utils/routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -83,9 +84,28 @@ class _LoginPageState extends State<LoginPage> {
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        return;
+                        try {
+                          await clientHttp.login(
+                            UserRequestDto(
+                              username: usernameController.text,
+                              password: passwordController.text,
+                            ),
+                          );
+                          if (!context.mounted) {
+                            return;
+                          }
+                          Navigator.pushNamed(context, AppRoutes.HOME_PAGE);
+                        } on FlutterError catch (e) {
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: Text('Erro ao logar'),
+                              content: Text(e.message),
+                            ),
+                          );
+                        }
                       }
                     },
                     child: Text('Login'),
@@ -100,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                         (_) => AlertDialog(
                           title: Text('Login de Teste'),
                           content: Text(
-                            'Username: emylys \nPassword: emylyspass',
+                            'Username: emilys \nPassword: emilyspass',
                           ),
                         ),
                   );
