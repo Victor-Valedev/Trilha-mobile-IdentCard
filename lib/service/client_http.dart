@@ -14,7 +14,7 @@ class ClientHttp {
     );
 
     if (response.statusCode == 200) {
-      UserRequestDto.fromJson(response.body);
+      return UserResponseDto.fromJson(response.body);
     }
 
     if (response.statusCode == 400) {
