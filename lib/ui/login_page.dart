@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trilhamobileatvd/model/dto/user_request_dto.dart';
 import 'package:trilhamobileatvd/service/client_http.dart';
 import 'package:trilhamobileatvd/utils/routes.dart';
@@ -88,19 +89,28 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () async {
                       if (_isLoading) return;
                       if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          _isLoading = true;
+                        });
+
                         try {
-                          setState(() {
-                            _isLoading = true;
-                          });
-                          await clientHttp.login(
+                          final userResponse = await clientHttp.login(
                             UserRequestDto(
                               username: usernameController.text,
                               password: passwordController.text,
                             ),
                           );
+
+                          final preference = await SharedPreferences.getInstance();
+                          await preference.setString(
+                            'logged_user',
+                            userResponse.toJson(),
+                          );
+
                           if (!context.mounted) {
                             return;
                           }
+
                           Navigator.pushNamed(context, AppRoutes.HOME_PAGE);
                         } on FlutterError catch (e) {
                           showDialog(

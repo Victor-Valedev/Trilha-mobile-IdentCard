@@ -8,9 +8,7 @@ class UserResponseDto {
   String lastName;
   String gender;
   String image;
-  String acessToken;
-  String refreshToken;
-  
+
   UserResponseDto({
     required this.id,
     required this.username,
@@ -19,8 +17,6 @@ class UserResponseDto {
     required this.lastName,
     required this.gender,
     required this.image,
-    required this.acessToken,
-    required this.refreshToken,
   });
 
   UserResponseDto copyWith({
@@ -42,8 +38,6 @@ class UserResponseDto {
       lastName: lastName ?? this.lastName,
       gender: gender ?? this.gender,
       image: image ?? this.image,
-      acessToken: acessToken ?? this.acessToken,
-      refreshToken: refreshToken ?? this.refreshToken,
     );
   }
 
@@ -56,8 +50,6 @@ class UserResponseDto {
       'lastName': lastName,
       'gender': gender,
       'image': image,
-      'acessToken': acessToken,
-      'refreshToken': refreshToken,
     };
   }
 
@@ -70,47 +62,42 @@ class UserResponseDto {
       lastName: map['lastName'] ?? '',
       gender: map['gender'] ?? '',
       image: map['image'] ?? '',
-      acessToken: map['acessToken'] ?? '',
-      refreshToken: map['refreshToken'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory UserResponseDto.fromJson(String source) => UserResponseDto.fromMap(json.decode(source));
+  factory UserResponseDto.fromJson(String source) =>
+      UserResponseDto.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'UserResponseDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image, acessToken: $acessToken, refreshToken: $refreshToken)';
+    return 'UserResponseDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is UserResponseDto &&
-      other.id == id &&
-      other.username == username &&
-      other.email == email &&
-      other.firstName == firstName &&
-      other.lastName == lastName &&
-      other.gender == gender &&
-      other.image == image &&
-      other.acessToken == acessToken &&
-      other.refreshToken == refreshToken;
+        other.id == id &&
+        other.username == username &&
+        other.email == email &&
+        other.firstName == firstName &&
+        other.lastName == lastName &&
+        other.gender == gender &&
+        other.image == image;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      username.hashCode ^
-      email.hashCode ^
-      firstName.hashCode ^
-      lastName.hashCode ^
-      gender.hashCode ^
-      image.hashCode ^
-      acessToken.hashCode ^
-      refreshToken.hashCode;
+        username.hashCode ^
+        email.hashCode ^
+        firstName.hashCode ^
+        lastName.hashCode ^
+        gender.hashCode ^
+        image.hashCode;
   }
 }
 
@@ -123,6 +110,4 @@ class UserResponseDto {
 //   "lastName": "Johnson",
 //   "gender": "female",
 //   "image": "https://dummyjson.com/icon/emilys/128",
-//   "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...", // JWT accessToken (for backward compatibility) in response and cookies
-//   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." // refreshToken in response and cookies
 // }
