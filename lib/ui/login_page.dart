@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final ClientHttp clientHttp = ClientHttp();
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +86,12 @@ class _LoginPageState extends State<LoginPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () async {
+                      if (_isLoading) return;
                       if (_formKey.currentState!.validate()) {
                         try {
+                          setState(() {
+                            _isLoading = true;
+                          });
                           await clientHttp.login(
                             UserRequestDto(
                               username: usernameController.text,
@@ -100,15 +105,23 @@ class _LoginPageState extends State<LoginPage> {
                         } on FlutterError catch (e) {
                           showDialog(
                             context: context,
-                            builder: (_) => AlertDialog(
-                              title: Text('Erro ao logar'),
-                              content: Text(e.message),
-                            ),
+                            builder:
+                                (_) => AlertDialog(
+                                  title: Text('Erro ao logar'),
+                                  content: Text(e.message),
+                                ),
                           );
+                        } finally {
+                          setState(() {
+                            _isLoading = false;
+                          });
                         }
                       }
                     },
-                    child: Text('Login'),
+                    child:
+                        _isLoading
+                            ? CircularProgressIndicator()
+                            : Text('Login'),
                   ),
                 ),
               ),
@@ -120,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                         (_) => AlertDialog(
                           title: Text('Login de Teste'),
                           content: Text(
-                            'Username: emilys \nPassword: emilyspass',
+                            'Username: michaelw \nPassword: michaelwpass',
                           ),
                         ),
                   );
