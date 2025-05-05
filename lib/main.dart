@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:trilhamobileatvd/ui/home_page.dart';
 import 'package:trilhamobileatvd/ui/login_page.dart';
+import 'package:trilhamobileatvd/utils/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +29,11 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: LoginPage(),
+      initialRoute: AppRoutes.LOGIN_PAGE,
+      routes: {
+        AppRoutes.HOME_PAGE: (ctx) => HomePage(),
+        AppRoutes.LOGIN_PAGE: (ctx) => LoginPage(),
+      },
     );
   }
 }
