@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:trilhamobileatvd/service/client_http.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,6 +10,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final ClientHttp clientHttp = ClientHttp();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         child: Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -41,6 +49,13 @@ class _LoginPageState extends State<LoginPage> {
                     fillColor: Colors.white,
                     filled: true,
                   ),
+                  controller: usernameController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Preencha o campo com seu username.';
+                    }
+                    return null;
+                  },
                 ),
               ),
               Padding(
@@ -53,6 +68,13 @@ class _LoginPageState extends State<LoginPage> {
                     filled: true,
                   ),
                   obscureText: true,
+                  controller: passwordController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Preencha o campo com sua senha.';
+                    }
+                    return null;
+                  },
                 ),
               ),
               SizedBox(height: 15),
@@ -60,17 +82,27 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(onPressed: () {}, child: Text('Login')),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        return;
+                      }
+                    },
+                    child: Text('Login'),
+                  ),
                 ),
               ),
               TextButton(
                 onPressed: () {
                   showDialog(
-                    context: context, 
-                    builder: (_) => AlertDialog(
-                      title: Text('Login de Teste'),
-                      content: Text('Username: emylys \nPassword: emylyspass'),
-                    ),
+                    context: context,
+                    builder:
+                        (_) => AlertDialog(
+                          title: Text('Login de Teste'),
+                          content: Text(
+                            'Username: emylys \nPassword: emylyspass',
+                          ),
+                        ),
                   );
                 },
                 style: TextButton.styleFrom(
