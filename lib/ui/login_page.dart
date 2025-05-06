@@ -102,16 +102,34 @@ class _LoginPageState extends State<LoginPage> {
                           );
 
                           final preference = await SharedPreferences.getInstance();
+
+                          await preference.setString(
+                            'auth_token',
+                            userResponse.accessToken,
+                          );
+
+                          final users = await clientHttp.loggedUser(
+                            userResponse.accessToken,
+                          );
+
                           await preference.setString(
                             'logged_user',
                             userResponse.toJson(),
+                          );
+
+                          await preference.setString(
+                            'logged_user',
+                            users.toJson(),
                           );
 
                           if (!context.mounted) {
                             return;
                           }
 
-                          Navigator.pushNamed(context, AppRoutes.HOME_PAGE);
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutes.HOME_PAGE,
+                          );
                         } on FlutterError catch (e) {
                           showDialog(
                             context: context,

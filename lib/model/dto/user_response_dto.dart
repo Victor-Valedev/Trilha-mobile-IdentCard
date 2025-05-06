@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:trilhamobileatvd/model/dto/address_response_dto.dart';
 
 class UserResponseDto {
   int id;
@@ -6,8 +7,12 @@ class UserResponseDto {
   String email;
   String firstName;
   String lastName;
+  int age;
   String gender;
   String image;
+  String accessToken;
+  String refreshToken;
+  final AddressResponseDto address;
 
   UserResponseDto({
     required this.id,
@@ -15,9 +20,14 @@ class UserResponseDto {
     required this.email,
     required this.firstName,
     required this.lastName,
+    required this.age,
     required this.gender,
     required this.image,
+    required this.accessToken,
+    required this.refreshToken,
+    required this.address,
   });
+  
 
   UserResponseDto copyWith({
     int? id,
@@ -25,10 +35,12 @@ class UserResponseDto {
     String? email,
     String? firstName,
     String? lastName,
+    int? age,
     String? gender,
     String? image,
-    String? acessToken,
+    String? accessToken,
     String? refreshToken,
+    AddressResponseDto? address,
   }) {
     return UserResponseDto(
       id: id ?? this.id,
@@ -36,8 +48,12 @@ class UserResponseDto {
       email: email ?? this.email,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
+      age: age ?? this.age,
       gender: gender ?? this.gender,
       image: image ?? this.image,
+      accessToken: accessToken ?? this.accessToken,
+      refreshToken: refreshToken ?? this.refreshToken,
+      address: address ?? this.address,
     );
   }
 
@@ -48,8 +64,12 @@ class UserResponseDto {
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
+      'age': age,
       'gender': gender,
       'image': image,
+      'accessToken': accessToken,
+      'refreshToken': refreshToken,
+      'address': address.toMap(),
     };
   }
 
@@ -60,44 +80,59 @@ class UserResponseDto {
       email: map['email'] ?? '',
       firstName: map['firstName'] ?? '',
       lastName: map['lastName'] ?? '',
+      age: map['age']?.toInt() ?? 0,
       gender: map['gender'] ?? '',
       image: map['image'] ?? '',
+      accessToken: map['accessToken'] ?? '',
+      refreshToken: map['refreshToken'] ?? '',
+      address: map['address'] != null
+            ? AddressResponseDto.fromMap(map['address'])
+            : AddressResponseDto(
+              country: ''
+            )
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory UserResponseDto.fromJson(String source) =>
-      UserResponseDto.fromMap(json.decode(source));
+  factory UserResponseDto.fromJson(String source) => UserResponseDto.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'UserResponseDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, gender: $gender, image: $image)';
+    return 'UserResponseDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender, image: $image, accessToken: $accessToken, refreshToken: $refreshToken, address: $address)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is UserResponseDto &&
-        other.id == id &&
-        other.username == username &&
-        other.email == email &&
-        other.firstName == firstName &&
-        other.lastName == lastName &&
-        other.gender == gender &&
-        other.image == image;
+      other.id == id &&
+      other.username == username &&
+      other.email == email &&
+      other.firstName == firstName &&
+      other.lastName == lastName &&
+      other.age == age &&
+      other.gender == gender &&
+      other.image == image &&
+      other.accessToken == accessToken &&
+      other.refreshToken == refreshToken &&
+      other.address == address;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        username.hashCode ^
-        email.hashCode ^
-        firstName.hashCode ^
-        lastName.hashCode ^
-        gender.hashCode ^
-        image.hashCode;
+      username.hashCode ^
+      email.hashCode ^
+      firstName.hashCode ^
+      lastName.hashCode ^
+      age.hashCode ^
+      gender.hashCode ^
+      image.hashCode ^
+      accessToken.hashCode ^
+      refreshToken.hashCode ^
+      address.hashCode;
   }
 }
 

@@ -24,4 +24,19 @@ class ClientHttp {
 
     throw FlutterError('Falha ao realizar login');
   }
+
+  Future<UserResponseDto> loggedUser(String token) async {
+    final response = await http.get(
+      Uri.parse(Constants.GET_USERS),
+      headers: {
+        'Authorization': 'Bearer $token'
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return UserResponseDto.fromJson(response.body);
+    }
+
+    throw FlutterError('Erro ao buscar dados do usuário');
+  }
 }
