@@ -1,16 +1,32 @@
-# trilhamobileatvd
+# 📱 Projeto de Estudos - Trilha Mobile Flutter
 
-A new Flutter project.
+Este é um **projeto pessoal de estudos**, desenvolvido como parte da **trilha de aprendizado mobile**. O objetivo principal é praticar os fundamentos do Flutter, consumindo APIs REST e manipulando dados de usuário.
 
-## Getting Started
+## 🚀 Funcionalidades
 
-This project is a starting point for a Flutter application.
+- 🔐 Tela de login com autenticação (usando a [API DummyJSON](https://dummyjson.com))
+- 🧠 Armazenamento local do usuário logado com SharedPreferences
+- 🪪 Tela Home com dados do usuário exibidos em um cartão informativo
+- 🌐 Requisições HTTP com tratamento de erro
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🛠️ Tecnologias e pacotes utilizados
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Flutter**
+- **Dart**
+- `http`: para fazer chamadas REST
+- `shared_preferences`: para persistir dados localmente
+- `Material Design`: para a interface do app
+
+## 📷 Preview
+
+![image](https://github.com/user-attachments/assets/d4a6a0d6-71d3-4d2b-8401-b079ad76ebe4)
+
+![image](https://github.com/user-attachments/assets/2f135ae8-3a93-4b68-a5d2-e5836b53cea7)
+
+
+## 🧪 Em desenvolvimento
+
+Este projeto ainda está em evolução, com foco em aprendizado e boas práticas de desenvolvimento mobile.
+
+
