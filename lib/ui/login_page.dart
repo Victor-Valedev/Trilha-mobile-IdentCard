@@ -161,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                         (_) => AlertDialog(
                           title: Text('Login de Teste'),
                           content: Text(
-                            'Username: michaelw \nPassword: michaelwpass',
+                            'Username: chloem \nPassword: chloempass',
                           ),
                         ),
                   );

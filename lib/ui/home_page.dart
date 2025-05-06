@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trilhamobileatvd/components/drawer_component.dart';
+import 'package:trilhamobileatvd/components/user_card.dart';
 import 'package:trilhamobileatvd/model/dto/user_response_dto.dart';
 import 'package:trilhamobileatvd/service/client_http.dart';
 
@@ -86,44 +87,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 Divider(),
-                ListTile(
-                  contentPadding: EdgeInsets.all(12),
-                  tileColor: Colors.white,
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      _user!.image,
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  title: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'ID ${_user!.id}',
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          fontWeight: FontWeight.normal,
-                          color: Colors.grey,
-                          fontSize: 15,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        '${_user!.firstName} ${_user!.lastName}',
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Gender: ${_user!.gender}',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleLarge!.copyWith(fontSize: 15),
-                      ),
-                    ],
-                  ),
-                ),
+                UserCard(user: _user!),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
