@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trilhamobileatvd/components/drawer_component.dart';
 import 'package:trilhamobileatvd/model/dto/user_response_dto.dart';
 import 'package:trilhamobileatvd/service/client_http.dart';
 
@@ -60,6 +61,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Bem-vindo, ${_user!.firstName}!')),
+      drawer: DrawerComponent(),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Container(
