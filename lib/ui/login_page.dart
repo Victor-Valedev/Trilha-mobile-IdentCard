@@ -19,6 +19,13 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
 
   @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Identification card')),
@@ -101,7 +108,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           );
 
-                          final preference = await SharedPreferences.getInstance();
+                          final preference =
+                              await SharedPreferences.getInstance();
 
                           await preference.setString(
                             'auth_token',
